@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giáo Sư và Mê Cung - Bìa sách</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+        
+        .book-cover {
+            width: 350px;
+            height: 500px;
+            background: linear-gradient(45deg, #0c1445, #1e3a8a, #082f49);
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            color: white;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .cover-content {
+            z-index: 2;
+            position: relative;
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #f8fafc;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: #e2e8f0;
+        }
+        
+        .author {
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: auto;
+            padding-bottom: 10px;
+            color: #f8fafc;
+            text-align: right;
+        }
+        
+        .decoration {
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .circle-1 {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%);
+            top: -80px;
+            right: -80px;
+        }
+        
+        .circle-2 {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(139, 92, 246, 0) 70%);
+            bottom: -60px;
+            left: -60px;
+        }
+        
+        .quantum-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        
+        .dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .maze {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 120px;
+            height: 120px;
+            opacity: 0.15;
+        }
+        
+        .publisher {
+            font-size: 12px;
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            color: #cbd5e1;
+        }
+        
+        .science-element {
+            position: absolute;
+            top: 50%;
+            left: 30px;
+            width: 40px;
+            height: 120px;
+            opacity: 0.7;
+            transform: translateY(-50%);
+        }
+        
+        .line {
+            position: absolute;
+            left: 20px;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, #6366f1, transparent);
+        }
+        
+        .line-1 { left: 10px; height: 80%; top: 10%; }
+        .line-2 { left: 20px; height: 90%; top: 5%; }
+        .line-3 { left: 30px; height: 70%; top: 15%; }
+        
+        .wisdom-symbol {
+            position: absolute;
+            top: 30%;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            opacity: 0.8;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="book-cover">
+        <div class="decoration circle-1"></div>
+        <div class="decoration circle-2"></div>
+        
+        <div class="quantum-dots">
+            <!-- Các chấm lượng tử sẽ được thêm bằng JS -->
+        </div>
+        
+        <div class="science-element">
+            <div class="line line-1"></div>
+            <div class="line line-2"></div>
+            <div class="line line-3"></div>
+        </div>
+        
+        <div class="wisdom-symbol">∞</div>
+        
+        <svg class="maze" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10,10 H90 V90 H10 Z M20,20 V80 H80 V20 Z M30,30 H70 V70 H30 Z M40,40 V60 H60 V40 Z" 
+                  stroke="white" fill="none" stroke-width="0.5"/>
+        </svg>
+        
+        <div class="cover-content">
+            <div class="subtitle">MỘT HÀNH TRÌNH VÀO TRÍ TUỆ NHÂN TẠO TỔNG HỢP</div>
+            <h1 class="title">GIÁO SƯ<br>VÀ MÊ CUNG</h1>
+        </div>
+        
+        <div class="author">MAI THẾ DUY</div>
+        <div class="publisher">NHÀ XUẤT BẢN TRI THỨC HIỆN ĐẠI</div>
+    </div>
+
+    <script>
+        // Thêm các chấm lượng tử ngẫu nhiên
+        const quantumDots = document.querySelector('.quantum-dots');
+        for (let i = 0; i < 40; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.style.left = `${Math.random() * 100}%`;
+            dot.style.top = `${Math.random() * 100}%`;
+            dot.style.width = `${3 + Math.random() * 5}px`;
+            dot.style.height = dot.style.width;
+            dot.style.opacity = 0.3 + Math.random() * 0.5;
+            quantumDots.appendChild(dot);
+        }
+    </script>
+</body>
+</html>
