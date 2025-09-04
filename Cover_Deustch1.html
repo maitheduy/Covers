@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bìa sách học tiếng Đức cho trẻ em</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Comic+Neue:wght@400;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa, #e4edf5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Comic Neue', cursive;
+        }
+        
+        .a4-container {
+            width: 210mm; /* Kích thước A4 */
+            height: 297mm;
+            padding: 10mm;
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .title {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 48px;
+            color: #2c3e50;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 36px;
+            color: #e74c3c;
+            margin: 10px 0 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .illustration {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .word-card {
+            width: 120px;
+            height: 150px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .word-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .word-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+        }
+        
+        .emoji {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .german-word {
+            font-weight: bold;
+            font-size: 20px;
+            color: #2c3e50;
+            margin: 5px 0;
+        }
+        
+        .vietnamese-word {
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+        
+        .drawing {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            height: 200px;
+        }
+        
+        .drawing svg {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .author {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 5px 0;
+        }
+        
+        .age {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+        }
+        
+        .decoration {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .decoration-1 {
+            top: 50px;
+            right: 50px;
+            font-size: 120px;
+            color: #3498db;
+            transform: rotate(15deg);
+        }
+        
+        .decoration-2 {
+            bottom: 50px;
+            left: 50px;
+            font-size: 150px;
+            color: #2ecc71;
+            transform: rotate(-10deg);
+        }
+        
+        .decoration-3 {
+            top: 200px;
+            left: 100px;
+            font-size: 100px;
+            color: #f39c12;
+            transform: rotate(5deg);
+        }
+        
+        .decoration-4 {
+            bottom: 150px;
+            right: 100px;
+            font-size: 130px;
+            color: #9b59b6;
+            transform: rotate(-5deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="a4-container">
+        <div class="age">Tủ sách của Gấu , Linh iu</div>
+        
+        <div class="decoration decoration-1">A</div>
+        <div class="decoration decoration-2">B</div>
+        <div class="decoration decoration-3">C</div>
+        <div class="decoration decoration-4">D</div>
+        
+        <div class="header">
+            <h1 class="title">HỌC TIẾNG ĐỨC CÙNG BÉ</h1>
+            <h2 class="subtitle">Deutsch für Kinder</h2>
+        </div>
+        
+        <div class="content">
+            <div class="illustration">
+                <div class="word-card">
+                    <div class="emoji">🐶</div>
+                    <div class="german-word">der Hund</div>
+                    <div class="vietnamese-word">con chó</div>
+                </div>
+                
+                <div class="word-card">
+                    <div class="emoji">🐱</div>
+                    <div class="german-word">die Katze</div>
+                    <div class="vietnamese-word">con mèo</div>
+                </div>
+                
+                <div class="word-card">
+                    <div class="emoji">🍎</div>
+                    <div class="german-word">der Apfel</div>
+                    <div class="vietnamese-word">quả táo</div>
+                </div>
+                
+                <div class="word-card">
+                    <div class="emoji">🏠</div>
+                    <div class="german-word">das Haus</div>
+                    <div class="vietnamese-word">ngôi nhà</div>
+                </div>
+            </div>
+            
+            <div class="drawing">
+                <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Bầu trời -->
+                    <rect width="800" height="150" fill="#87CEEB"/>
+                    
+                    <!-- Mặt trời -->
+                    <circle cx="700" cy="70" r="40" fill="#FFD700"/>
+                    
+                    <!-- Mây -->
+                    <ellipse cx="150" cy="60" rx="40" ry="20" fill="white"/>
+                    <ellipse cx="180" cy="50" rx="50" ry="25" fill="white"/>
+                    <ellipse cx="210" cy="60" rx="40" ry="20" fill="white"/>
+                    
+                    <ellipse cx="550" cy="80" rx="40" ry="20" fill="white"/>
+                    <ellipse cx="580" cy="70" rx="50" ry="25" fill="white"/>
+                    <ellipse cx="610" cy="80" rx="40" ry="20" fill="white"/>
+                    
+                    <!-- Cỏ -->
+                    <rect y="150" width="800" height="150" fill="#7CFC00"/>
+                    
+                    <!-- Ngôi trường -->
+                    <rect x="300" y="100" width="200" height="100" fill="#FFD700"/>
+                    <polygon points="300,100 400,50 500,100" fill="#FF6347"/>
+                    <rect x="340" y="130" width="40" height="70" fill="#8B4513"/>
+                    <rect x="420" y="130" width="40" height="70" fill="#8B4513"/>
+                    <rect x="360" y="160" width="80" height="40" fill="#87CEEB"/>
+                    
+                    <!-- Gấu -->
+                    <g transform="translate(100, 180)">
+                        <!-- Thân gấu -->
+                        <ellipse cx="50" cy="50" rx="40" ry="50" fill="#8B4513"/>
+                        
+                        <!-- Đầu gấu -->
+                        <circle cx="50" cy="10" r="30" fill="#8B4513"/>
+                        
+                        <!-- Tai gấu -->
+                        <circle cx="25" cy="-5" r="15" fill="#8B4513"/>
+                        <circle cx="75" cy="-5" r="15" fill="#8B4513"/>
+                        <circle cx="25" cy="-5" r="8" fill="#D2691E"/>
+                        <circle cx="75" cy="-5" r="8" fill="#D2691E"/>
+                        
+                        <!-- Mắt gấu -->
+                        <circle cx="40" cy="10" r="5" fill="black"/>
+                        <circle cx="60" cy="10" r="5" fill="black"/>
+                        <circle cx="42" cy="8" r="2" fill="white"/>
+                        <circle cx="62" cy="8" r="2" fill="white"/>
+                        
+                        <!-- Mũi gấu -->
+                        <ellipse cx="50" cy="20" rx="8" ry="6" fill="black"/>
+                        
+                        <!-- Miệng gấu -->
+                        <path d="M 40 30 Q 50 40 60 30" stroke="black" stroke-width="2" fill="none"/>
+                        
+                        <!-- Tay gấu cầm sách -->
+                        <ellipse cx="15" cy="40" rx="15" ry="8" fill="#8B4513" transform="rotate(-30 15 40)"/>
+                        <rect x="5" y="25" width="20" height="25" fill="#4169E1" transform="rotate(-30 15 40)"/>
+                        
+                        <!-- Chân gấu -->
+                        <ellipse cx="30" cy="90" rx="12" ry="20" fill="#8B4513"/>
+                        <ellipse cx="70" cy="90" rx="12" ry="20" fill="#8B4513"/>
+                    </g>
+                    
+                    <!-- Bé gái -->
+                    <g transform="translate(600, 180)">
+                        <!-- Thân bé gái -->
+                        <rect x="20" y="30" width="40" height="60" rx="10" fill="#FF69B4"/>
+                        
+                        <!-- Đầu bé gái -->
+                        <circle cx="40" cy="10" r="20" fill="#FDBCB4"/>
+                        
+                        <!-- Tóc bé gái -->
+                        <path d="M 20 5 Q 40 -10 60 5 Q 60 0 55 5 Q 40 -5 25 5 Q 20 0 20 5" fill="#8B4513"/>
+                        
+                        <!-- Mắt bé gái -->
+                        <circle cx="32" cy="10" r="3" fill="black"/>
+                        <circle cx="48" cy="10" r="3" fill="black"/>
+                        <circle cx="33" cy="9" r="1" fill="white"/>
+                        <circle cx="49" cy="9" r="1" fill="white"/>
+                        
+                        <!-- Mũi bé gái -->
+                        <ellipse cx="40" cy="15" rx="3" ry="2" fill="#F4A460"/>
+                        
+                        <!-- Miệng bé gái -->
+                        <path d="M 35 20 Q 40 25 45 20" stroke="black" stroke-width="1.5" fill="none"/>
+                        
+                        <!-- Tay bé gái cầm sách -->
+                        <rect x="5" y="35" width="8" height="25" rx="4" fill="#FDBCB4"/>
+                        <rect x="0" y="30" width="15" height="20" fill="#32CD32"/>
+                        
+                        <rect x="67" y="35" width="8" height="25" rx="4" fill="#FDBCB4"/>
+                        <rect x="70" y="30" width="15" height="20" fill="#FF6347"/>
+                        
+                        <!-- Chân bé gái -->
+                        <rect x="25" y="85" width="8" height="25" rx="4" fill="#FDBCB4"/>
+                        <rect x="47" y="85" width="8" height="25" rx="4" fill="#FDBCB4"/>
+                        
+                        <!-- Giày bé gái -->
+                        <ellipse cx="29" cy="110" rx="6" ry="4" fill="#FF6347"/>
+                        <ellipse cx="51" cy="110" rx="6" ry="4" fill="#FF6347"/>
+                    </g>
+                    
+                    <!-- Bong bóng nói -->
+                    <g transform="translate(200, 120)">
+                        <ellipse cx="0" cy="0" rx="80" ry="40" fill="white" stroke="black" stroke-width="2"/>
+                        <path d="M -60 20 Q -70 30 -80 40" stroke="black" stroke-width="2" fill="none"/>
+                        <text x="0" y="5" font-family="Comic Neue" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">Guten Tag!</text>
+                    </g>
+                    
+                    <!-- Bong bóng nói -->
+                    <g transform="translate(550, 120)">
+                        <ellipse cx="0" cy="0" rx="80" ry="40" fill="white" stroke="black" stroke-width="2"/>
+                        <path d="M 60 20 Q 70 30 80 40" stroke="black" stroke-width="2" fill="none"/>
+                        <text x="0" y="5" font-family="Comic Neue" font-size="18" font-weight="bold" text-anchor="middle" fill="#e74c3c">Xin chào!</text>
+                    </g>
+                </svg>
+            </div>
+            
+            <div class="footer">
+                <div class="author">Tác giả: Mai Thế Duy</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
