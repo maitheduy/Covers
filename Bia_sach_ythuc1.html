@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bìa Sách - Dòng Ý Thức Toán Học</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            padding: 20px;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+        
+        .book-cover {
+            width: 210mm; /* Khổ A4 */
+            height: 297mm;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
+        }
+        
+        .background-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+                radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+                radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+                linear-gradient(90deg, transparent 98%, rgba(255, 255, 255, 0.2) 99%),
+                linear-gradient(transparent 98%, rgba(255, 255, 255, 0.2) 99%);
+            background-size: 30% 30%, 40% 40%, 50% 50%, 3% 3%, 3% 3%;
+        }
+        
+        .math-symbols {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.2;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .symbol {
+            position: absolute;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-1000px) rotate(360deg); }
+        }
+        
+        .header {
+            text-align: right;
+            z-index: 2;
+        }
+        
+        .title-container {
+            text-align: center;
+            margin: 40px 0;
+            z-index: 2;
+        }
+        
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 22px;
+            font-weight: 300;
+            font-style: italic;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+        
+        .author {
+            text-align: right;
+            font-size: 24px;
+            font-family: 'Playfair Display', serif;
+            z-index: 2;
+        }
+        
+        .publisher {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            font-size: 14px;
+            z-index: 2;
+        }
+        
+        .decoration {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            width: 100px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+            z-index: 2;
+        }
+        
+        .decoration::after {
+            content: "";
+            position: absolute;
+            top: -3px;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="book-cover">
+        <div class="background-pattern"></div>
+        
+        <div class="math-symbols">
+            <!-- Các ký hiệu toán học sẽ được thêm bằng JavaScript -->
+        </div>
+        
+        <div class="header">
+            <h2>KHÁM PHÁ BẢN CHẤT Ý THỨC</h2>
+        </div>
+        
+        <div class="title-container">
+            <h1 class="main-title">DÒNG Ý THỨC<br>TOÁN HỌC</h1>
+            <p class="subtitle">Hành trình khám phá kiến trúc tư duy giữa hỗn loạn và trật tự</p>
+        </div>
+        
+        <div class="author">
+            <p>MAI THẾ DUY</p>
+        </div>
+        
+        <div class="publisher">
+            <p>NHÀ XUẤT BẢN TRI THỨC</p>
+        </div>
+        
+        <div class="decoration"></div>
+    </div>
+
+    <script>
+        // Thêm các ký hiệu toán học trôi nổi
+        const mathSymbols = ['∑', '∫', '∂', '√', '∞', 'π', 'Ω', '∇', '∏', '∈', '∀', '∃', '≠', '≈', '≡', '≤', '≥', '→', '↔', '∧', '∨', '¬', '∴', '∵', '±'];
+        const symbolsContainer = document.querySelector('.math-symbols');
+        
+        for (let i = 0; i < 50; i++) {
+            const symbol = document.createElement('div');
+            symbol.className = 'symbol';
+            symbol.textContent = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+            symbol.style.left = `${Math.random() * 100}%`;
+            symbol.style.top = `${Math.random() * 100}%`;
+            symbol.style.animationDelay = `${Math.random() * 20}s`;
+            symbol.style.fontSize = `${14 + Math.random() * 20}px`;
+            symbolsContainer.appendChild(symbol);
+        }
+    </script>
+</body>
+</html>
