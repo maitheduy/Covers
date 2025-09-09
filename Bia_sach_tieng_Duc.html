@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dành cho học sinh du học Đức - Mai Thế Duy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .book-cover {
+            width: 595px;
+            height: 842px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 5px;
+        }
+        
+        .cover-content {
+            padding: 60px;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+            margin-top: 60px;
+        }
+        
+        .title br {
+            display: block;
+            content: "";
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            color: #000000;
+        }
+        
+        .author {
+            font-size: 22px;
+            font-weight: 500;
+            margin-top: auto;
+            padding-bottom: 20px;
+            color: #000000;
+            position: relative;
+        }
+        
+        .author::before {
+            content: "";
+            position: absolute;
+            top: -25px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #000000, transparent);
+            width: 80%;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            font-weight: 700;
+            font-size: 16px;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 12px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            z-index: 4;
+            color: #000000;
+            box-shadow: 
+                0 6px 12px rgba(0, 0, 0, 0.25),
+                0 8px 16px rgba(0, 0, 0, 0.15),
+                3px 3px 8px rgba(0, 0, 0, 0.2);
+            transform: perspective(500px) rotateX(5deg) rotateY(5deg);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+        }
+        
+        .logo:hover {
+            transform: perspective(500px) rotateX(0deg) rotateY(0deg);
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.3),
+                0 12px 20px rgba(0, 0, 0, 0.2),
+                4px 4px 10px rgba(0, 0, 0, 0.25);
+        }
+        
+        .german-flag {
+            position: absolute;
+            top: 80px; /* Nâng cờ lên cao hơn 1cm so với trước */
+            left: 40px;
+            width: 80px;
+            height: 48px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            box-shadow: 
+                0 4px 8px rgba(0, 0, 0, 0.2),
+                0 6px 12px rgba(0, 0, 0, 0.1),
+                2px 2px 4px rgba(0, 0, 0, 0.15);
+            z-index: 3;
+            transform: perspective(500px) rotateX(5deg) rotateY(-5deg);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .german-flag:hover {
+            transform: perspective(500px) rotateX(0deg) rotateY(0deg);
+            box-shadow: 
+                0 6px 12px rgba(0, 0, 0, 0.25),
+                0 8px 16px rgba(0, 0, 0, 0.15),
+                3px 3px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .flag-black {
+            height: 33.33%;
+            background-color: #000000;
+        }
+        
+        .flag-red {
+            height: 33.33%;
+            background-color: #FF0000;
+        }
+        
+        .flag-gold {
+            height: 33.33%;
+            background-color: #FFCC00;
+        }
+        
+        .flag-pole {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 40px;
+            background: linear-gradient(to bottom, #888 0%, #666 100%);
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+        
+        .flag-pole-top {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(to bottom, #AAA 0%, #888 100%);
+            border-radius: 50%;
+            z-index: 3;
+        }
+        
+        .corner-decoration {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        
+        .corner-tl {
+            top: -60px;
+            left: -60px;
+            border-bottom-right-radius: 100%;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .corner-tr {
+            top: -60px;
+            right: -60px;
+            border-bottom-left-radius: 100%;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .corner-bl {
+            bottom: -60px;
+            left: -60px;
+            border-top-right-radius: 100%;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .corner-br {
+            bottom: -60px;
+            right: -60px;
+            border-top-left-radius: 100%;
+            border-left: none;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="book-cover">
+        <!-- Trang trí góc -->
+        <div class="corner-decoration corner-tl"></div>
+        <div class="corner-decoration corner-tr"></div>
+        <div class="corner-decoration corner-bl"></div>
+        <div class="corner-decoration corner-br"></div>
+        
+        <!-- Cờ Đức với cột cờ -->
+        <div class="flag-pole"></div>
+        <div class="flag-pole-top"></div>
+        <div class="german-flag">
+            <div class="flag-black"></div>
+            <div class="flag-red"></div>
+            <div class="flag-gold"></div>
+        </div>
+        
+        <!-- Logo MIKA-D 36 với hiệu ứng 3D -->
+        <div class="logo">MIKA-D 36</div>
+        
+        <div class="cover-content">
+            <div>
+                <div class="subtitle">Hành trình chinh phục tiếng Đức</div>
+                <h1 class="title">Dành cho học sinh<br>du học Đức</h1>
+            </div>
+            <div class="author">Tác giả: Mai Thế Duy</div>
+        </div>
+    </div>
+</body>
+</html>
