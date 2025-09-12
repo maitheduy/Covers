@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8 Cuốn Sách Của Mai Thế Duy — Triển Lãm Tĩnh & 3D</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at center, #0f172a 0%, #16213e 70%, #0a111f 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 20px 120px;
+            overflow: hidden;
+            color: white;
+            perspective: 1000px;
+        }
+
+        .book-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .book {
+            width: 1000px;
+            height: 50px;
+            border-radius: 4px;
+            cursor: default;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            font-weight: 500;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            writing-mode: horizontal-tb;
+            text-orientation: upright;
+            overflow: hidden;
+            padding: 0 20px;
+            box-sizing: border-box;
+            position: relative;
+            transform: translateZ(0);
+            filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.25)) 
+                    drop-shadow(-1px -1px 3px rgba(255, 255, 255, 0.05));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        /* Hiệu ứng 3D cho gáy sách - Phần chính */
+        .book::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 4px;
+            z-index: -1;
+            transform: translateZ(-5px);
+            filter: brightness(0.7) contrast(1.2);
+            background: inherit;
+        }
+
+        /* Hiệu ứng chiều sâu 3D - cạnh trên */
+        .book::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent 90%);
+            border-radius: 4px 4px 0 0;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.6;
+            mix-blend-mode: overlay;
+        }
+
+        /* Hiệu ứng cạnh dưới 3D */
+        .book .bottom-edge {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8%;
+            background: linear-gradient(to top, rgba(0,0,0,0.4), transparent 90%);
+            border-radius: 0 0 4px 4px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Hiệu ứng cạnh trái 3D */
+        .book .left-edge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 3%;
+            background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
+            border-radius: 4px 0 0 4px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Hiệu ứng cạnh phải 3D */
+        .book .right-edge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 3%;
+            background: linear-gradient(to left, rgba(0,0,0,0.4), transparent);
+            border-radius: 0 4px 4px 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Hiệu ứng nổi bật khi di chuột */
+        .book:hover {
+            transform: translateZ(10px) rotateX(2deg);
+            filter: drop-shadow(4px 6px 10px rgba(0, 0, 0, 0.4)) 
+                    drop-shadow(-2px -2px 5px rgba(255, 255, 255, 0.1));
+            z-index: 10;
+        }
+
+        /* Hiệu ứng ánh sáng phản chiếu động */
+        .book .shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                transparent 100%);
+            transform: skewX(-25deg);
+            transition: left 0.8s ease;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .book:hover .shine {
+            left: 150%;
+        }
+
+        .author {
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0.9;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            white-space: nowrap;
+            text-align: left;
+            flex: 0 0 200px;
+            padding-left: 30px;
+            color: rgba(255,255,255,0.85);
+            z-index: 4;
+        }
+
+        .title {
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.2;
+            white-space: nowrap;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            flex: 1;
+            text-align: center;
+            color: rgba(255,255,255,0.95);
+            padding: 0 15px;
+            z-index: 4;
+        }
+
+        .publisher {
+            font-size: 12px;
+            opacity: 0.8;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            white-space: nowrap;
+            text-align: right;
+            flex: 0 0 200px;
+            padding-right: 30px;
+            color: rgba(255,255,255,0.8);
+            z-index: 4;
+        }
+
+        /* Gradient màu riêng biệt với hiệu ứng 3D */
+        .book:nth-child(1) { 
+            background: linear-gradient(90deg, #6a1b9a, #8A2BE2, #4B0082);
+            box-shadow: inset 2px 0 10px rgba(106, 27, 154, 0.7),
+                        inset -2px 0 10px rgba(75, 0, 130, 0.7);
+        }
+        .book:nth-child(2) { 
+            background: linear-gradient(90deg, #d84315, #FF4500, #FF6347);
+            box-shadow: inset 2px 0 10px rgba(216, 67, 21, 0.7),
+                        inset -2px 0 10px rgba(255, 99, 71, 0.7);
+        }
+        .book:nth-child(3) { 
+            background: linear-gradient(90deg, #00838f, #00CED1, #20B2AA);
+            box-shadow: inset 2px 0 10px rgba(0, 131, 143, 0.7),
+                        inset -2px 0 10px rgba(32, 178, 170, 0.7);
+        }
+        .book:nth-child(4) { 
+            background: linear-gradient(90deg, #6a1b9a, #9370DB, #7B68EE);
+            box-shadow: inset 2px 0 10px rgba(106, 27, 154, 0.7),
+                        inset -2px 0 10px rgba(123, 104, 238, 0.7);
+        }
+        .book:nth-child(5) { 
+            background: linear-gradient(90deg, #e65100, #FF8C00, #FFA500);
+            box-shadow: inset 2px 0 10px rgba(230, 81, 0, 0.7),
+                        inset -2px 0 10px rgba(255, 165, 0, 0.7);
+        }
+        .book:nth-child(6) { 
+            background: linear-gradient(90deg, #4a148c, #6A0DAD, #4B0082);
+            box-shadow: inset 2px 0 10px rgba(74, 20, 140, 0.7),
+                        inset -2px 0 10px rgba(75, 0, 130, 0.7);
+        }
+        .book:nth-child(7) { 
+            background: linear-gradient(90deg, #01579b, #00BFFF, #1E90FF);
+            box-shadow: inset 2px 0 10px rgba(1, 87, 155, 0.7),
+                        inset -2px 0 10px rgba(30, 144, 255, 0.7);
+        }
+        .book:nth-child(8) { 
+            background: linear-gradient(90deg, #0d47a1, #4A90E2, #003366);
+            box-shadow: inset 2px 0 10px rgba(13, 71, 161, 0.7),
+                        inset -2px 0 10px rgba(0, 51, 102, 0.7);
+        }
+
+        /* Làm mờ nền nhẹ để tôn sách */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.1);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Responsive: Mobile */
+        @media (max-width: 768px) {
+            .book {
+                width: 90vw;
+                height: 45px;
+                font-size: 13px;
+                padding: 0 15px;
+                margin-bottom: 6px;
+                filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2)) 
+                        drop-shadow(-0.5px -0.5px 2px rgba(255, 255, 255, 0.05));
+            }
+
+            .author {
+                flex: 0 0 100px;
+                padding-left: 15px;
+                font-size: 12px;
+            }
+
+            .title {
+                font-size: 15px;
+                padding: 0 8px;
+            }
+
+            .publisher {
+                flex: 0 0 120px;
+                padding-right: 15px;
+                font-size: 11px;
+            }
+
+            .book::before {
+                height: 7%;
+            }
+            
+            .book .left-edge,
+            .book .right-edge {
+                width: 4%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="book-stack" id="bookStack">
+
+        <!-- Book 1: Dưới cùng -->
+        <div class="book">
+            <div class="shine"></div>
+            <div class="left-edge"></div>
+            <div class="right-edge"></div>
+            <div class="bottom-edge"></div>
+            <div class="author">Mai Thế Duy</div>
+            <div class="title">Mã Bất Tử</div>
+            <div class="publisher">NXB Trẻ</div>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="book">
+            <div class="shine"></div>
+            <div class="left-edge"></div>
+            <div class="right-edge"></div>
+            <div class="bottom-edge"></div>
+            <div class="author">Mai Thế Duy</div>
+            <div class="title">Nhà kỹ sư cách mạng và nhà Vật lý tiên tri</div>
+            <div class="publisher">NXB Khoa học & Kỹ thuật</div>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="book">
+            <div class="shine"></div>
+            <div class="left-edge"></div>
+            <div class="right-edge"></div>
+            <div class="bottom-edge"></div>
+            <div class="author">Mai Thế Duy</div>
+            <div class="title">Dòng ý thức toán học</div>
+            <div class="publisher">NXB Đại học Quốc gia Hà Nội</div>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="book">
+            <div class="shine"></div>
+            <div class="left-edge"></div>
+            <div class="right-edge"></div>
+            <div class="bottom-edge"></div>
+            <div class="author">Mai Thế Duy</div>
+            <div class="title">Dành cho học sinh du học Đức</div>
+            <div class="publisher">NXB Giáo dục Việt Nam</div>
+        </div>
+
+        <!-- Book 5 -->
+        <div class="book">
+            <div class="shine"></div>
+            <div class="left-edge"></div>
+            <div class="right-edge"></div>
+            <div class="bottom-edge"></div>
+            <div class="author">Mai Thế Duy</div>
+            <div class="title">Phép Thuật "Nâng Chiều": Giải Cứu Dữ Liệu Khỏi Mớ Hỗn Độn</div>
+            <div class="publisher">NXB Tổng hợp TP.HCM</div>
+        </div>
+
+        <!-- Book 6 -->
+        <div class="book">
+            <div class="shine"></div>
+            <div class="left-edge"></div>
+            <div class="right-edge"></div>
+            <div class="bottom-edge"></div>
+            <div class="author">Mai Thế Duy</div>
+            <div class="title">Siêu khối cong trên một sân khấu phẳng</div>
+            <div class="publisher">NXB Văn học</div>
+        </div>
+
+        <!-- Book 7 -->
+        <div class="book">
+            <div class="shine"></div>
+            <div class="left-edge"></div>
+            <div class="right-edge"></div>
+            <div class="bottom-edge"></div>
+            <div class="author">Mai Thế Duy</div>
+            <div class="title">Hành trình khám phá định nghĩa mét</div>
+            <div class="publisher">NXB Khoa học Tự nhiên và Công nghệ</div>
+        </div>
+
+        <!-- Book 8: Trên cùng -->
+        <div class="book">
+            <div class="shine"></div>
+            <div class="left-edge"></div>
+            <div class="right-edge"></div>
+            <div class="bottom-edge"></div>
+            <div class="author">Mai Thế Duy</div>
+            <div class="title">Hành trình vào thế giới lượng tử</div>
+            <div class="publisher">NXB Tri thức</div>
+        </div>
+
+    </div>
+
+</body>
+</html>
