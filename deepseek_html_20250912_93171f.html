@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gáy sách ngang - Mã Bất Tử</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #2c3e50, #4a69bd);
+            font-family: 'Source Sans Pro', sans-serif;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .horizontal-spine {
+            width: 842px; /* Chiều dài */
+            height: 30px; /* Độ dày 3cm */
+            background: linear-gradient(to right, #0c1f38 0%, #1a3a5f 50%, #2c5282 100%);
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.3),
+                inset 0 -3px 10px rgba(0, 0, 0, 0.2),
+                inset 0 3px 10px rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            border-radius: 3px;
+            position: relative;
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .spine-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .spine-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #64FFDA;
+            white-space: nowrap;
+        }
+        
+        .spine-author {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            color: #64FFDA;
+            text-align: center;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .spine-publisher {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+        
+        .spine-decoration {
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #64FFDA, transparent);
+            margin: 0 20px;
+            border-radius: 2px;
+            opacity: 0.7;
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+        }
+        
+        .spine-left-notch, .spine-right-notch {
+            height: 100%;
+            width: 8px;
+            background: linear-gradient(to bottom, #0c1f38, #2c5282, #0c1f38);
+            position: absolute;
+            top: 0;
+            border-radius: 2px;
+        }
+        
+        .spine-left-notch {
+            left: 0;
+        }
+        
+        .spine-right-notch {
+            right: 0;
+        }
+        
+        .spine-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(100, 255, 218, 0.1), transparent);
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .info-text {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .control-btn {
+            background: #4a69bd;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Source Sans Pro', sans-serif;
+            transition: background 0.3s;
+        }
+        
+        .control-btn:hover {
+            background: #1e3a8a;
+        }
+        
+        /* Hiệu ứng xoay */
+        .rotated {
+            transform: rotate(25deg);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 900px) {
+            .horizontal-spine {
+                width: 90vw;
+                height: 25px;
+            }
+            
+            .spine-title {
+                font-size: 18px;
+            }
+            
+            .spine-author {
+                font-size: 12px;
+            }
+            
+            .spine-publisher {
+                font-size: 9px;
+            }
+            
+            .spine-decoration {
+                width: 60px;
+                margin: 0 10px;
+            }
+            
+            .info-text {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .horizontal-spine {
+                padding: 0 20px;
+                height: 22px;
+            }
+            
+            .spine-title {
+                font-size: 16px;
+            }
+            
+            .spine-author {
+                font-size: 10px;
+            }
+            
+            .spine-publisher {
+                font-size: 8px;
+            }
+            
+            .spine-decoration {
+                width: 40px;
+                margin: 0 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="horizontal-spine" id="spine">
+            <div class="spine-left-notch"></div>
+            <div class="spine-glow"></div>
+            
+            <div class="spine-content">
+                <div class="spine-publisher">NXB TRI THỨC HIỆN ĐẠI</div>
+                <div class="spine-decoration"></div>
+                <div class="spine-title">MÃ BẤT TỬ</div>
+                <div class="spine-decoration"></div>
+                <div class="spine-author">MAI THẾ DUY</div>
+            </div>
+            
+            <div class="spine-right-notch"></div>
+        </div>
+        
+        <div class="info-text">
+            Gáy sách "Mã Bất Tử" - Kích thước: 84.2cm × 3cm
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn" id="rotateBtn">Xoay 25 độ</button>
+            <button class="control-btn" id="resetBtn">Trở về ngang</button>
+        </div>
+    </div>
+
+    <script>
+        // Hiệu ứng ánh sáng di chuyển
+        const spineGlow = document.querySelector('.spine-glow');
+        
+        function animateGlow() {
+            let position = -100;
+            const animation = setInterval(() => {
+                position += 1;
+                spineGlow.style.background = `linear-gradient(to right, transparent, rgba(100, 255, 218, 0.2) ${position}%, transparent)`;
+                
+                if (position > 200) {
+                    position = -100;
+                }
+            }, 50);
+        }
+        
+        animateGlow();
+        
+        // Điều khiển nút xoay
+        const spine = document.getElementById('spine');
+        const rotateBtn = document.getElementById('rotateBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        
+        rotateBtn.addEventListener('click', function() {
+            spine.classList.add('rotated');
+        });
+        
+        resetBtn.addEventListener('click', function() {
+            spine.classList.remove('rotated');
+        });
+    </script>
+</body>
+</html>
