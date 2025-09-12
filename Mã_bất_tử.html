@@ -48,7 +48,7 @@
         
         .title {
             font-family: 'Playfair Display', serif;
-            font-size: 82px;
+            font-size: 42px; /* Giảm một nửa so với 82px */
             font-weight: 900;
             line-height: 1;
             margin-bottom: 30px;
@@ -244,16 +244,16 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 500px;
-            height: 200px;
+            width: 300px;
+            height: 120px;
             background: radial-gradient(ellipse at center, rgba(100, 255, 218, 0.2) 0%, transparent 70%);
             z-index: 0;
             animation: halo-pulse 3s infinite alternate;
         }
         
         @keyframes halo-pulse {
-            from { opacity: 0.3; width: 500px; height: 200px; }
-            to { opacity: 0.6; width: 550px; height: 220px; }
+            from { opacity: 0.3; width: 300px; height: 120px; }
+            to { opacity: 0.6; width: 330px; height: 132px; }
         }
     </style>
 </head>
