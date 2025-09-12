@@ -76,7 +76,9 @@
             box-sizing: border-box;
             position: relative;
             transform: translateZ(0);
-            transition: transform 0.4s ease, filter 0.4s ease, box-shadow 0.4s ease;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        filter 0.5s ease, 
+                        box-shadow 0.5s ease;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
@@ -135,32 +137,11 @@
             z-index: 2;
         }
 
-        /* Hiệu ứng nổi bật khi di chuột */
+        /* Hiệu ứng nổi bật khi di chuột - NÂNG CAO ĐỘ NÂNG */
         .book:hover {
-            transform: translateZ(15px) rotateX(3deg) translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            transform: translateZ(30px) rotateX(5deg) translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
             z-index: 10;
-        }
-
-        /* Hiệu ứng ánh sáng phản chiếu động */
-        .book .shine {
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, 
-                transparent 0%, 
-                rgba(255, 255, 255, 0.25) 50%, 
-                transparent 100%);
-            transform: skewX(-25deg);
-            transition: left 0.8s ease;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .book:hover .shine {
-            left: 150%;
         }
 
         .author {
@@ -299,24 +280,25 @@
             z-index: 1;
         }
 
-        /* Hiệu ứng đổ bóng phía sau */
+        /* Hiệu ứng đổ bóng phía sau - NÂNG CAO */
         .shadow {
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 10%;
             right: 10%;
-            height: 10px;
-            background: rgba(0, 0, 0, 0.4);
+            height: 15px;
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 50%;
-            filter: blur(5px);
-            transform: translateZ(-20px);
+            filter: blur(8px);
+            transform: translateZ(-30px);
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
             z-index: -1;
         }
 
         .book:hover .shadow {
-            opacity: 1;
+            opacity: 0.7;
+            transform: translateZ(-30px) scale(1.1);
         }
 
         /* Làm mờ nền nhẹ để tôn sách */
@@ -383,6 +365,10 @@
             .book .right-edge {
                 width: 5%;
             }
+            
+            .book:hover {
+                transform: translateZ(20px) rotateX(3deg) translateY(-5px);
+            }
         }
     </style>
 </head>
@@ -398,7 +384,6 @@
 
         <!-- Book 1: Dưới cùng -->
         <div class="book">
-            <div class="shine"></div>
             <div class="left-edge"></div>
             <div class="right-edge"></div>
             <div class="pages"></div>
@@ -410,7 +395,6 @@
 
         <!-- Book 2 -->
         <div class="book">
-            <div class="shine"></div>
             <div class="left-edge"></div>
             <div class="right-edge"></div>
             <div class="pages"></div>
@@ -422,7 +406,6 @@
 
         <!-- Book 3 -->
         <div class="book">
-            <div class="shine"></div>
             <div class="left-edge"></div>
             <div class="right-edge"></div>
             <div class="pages"></div>
@@ -434,7 +417,6 @@
 
         <!-- Book 4 -->
         <div class="book">
-            <div class="shine"></div>
             <div class="left-edge"></div>
             <div class="right-edge"></div>
             <div class="pages"></div>
@@ -446,7 +428,6 @@
 
         <!-- Book 5 -->
         <div class="book">
-            <div class="shine"></div>
             <div class="left-edge"></div>
             <div class="right-edge"></div>
             <div class="pages"></div>
@@ -458,19 +439,17 @@
 
         <!-- Book 6 -->
         <div class="book">
-            <div class="shine"></div>
             <div class="left-edge"></div>
             <div class="right-edge"></div>
             <div class="pages"></div>
             <div class="shadow"></div>
             <div class="author">Mai Thế Duy</div>
             <div class="title">Siêu khối cong trên một sân khấu phẳng</div>
-            <div class="publisher">NXB Văn học</div>
+            <div class="publisher">NXB Toán học</div> <!-- Đã thay đổi từ Văn học sang Toán học -->
         </div>
 
         <!-- Book 7 -->
         <div class="book">
-            <div class="shine"></div>
             <div class="left-edge"></div>
             <div class="right-edge"></div>
             <div class="pages"></div>
@@ -482,7 +461,6 @@
 
         <!-- Book 8: Trên cùng -->
         <div class="book">
-            <div class="shine"></div>
             <div class="left-edge"></div>
             <div class="right-edge"></div>
             <div class="pages"></div>
@@ -512,12 +490,14 @@
                 // Hiệu ứng hover nâng cao
                 book.addEventListener('mouseenter', function() {
                     const shadow = this.querySelector('.shadow');
-                    shadow.style.opacity = '1';
+                    shadow.style.opacity = '0.7';
+                    shadow.style.transform = 'translateZ(-30px) scale(1.1)';
                 });
                 
                 book.addEventListener('mouseleave', function() {
                     const shadow = this.querySelector('.shadow');
                     shadow.style.opacity = '0';
+                    shadow.style.transform = 'translateZ(-30px)';
                 });
             });
         });
