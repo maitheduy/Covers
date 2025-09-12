@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8 Cuốn Sách Của tác giả Mai Thế Duy — lĩnh vực Khoa học tự nhiên và Triết học </title>
+    <title>8 Cuốn Sách Của Tác Giả Mai Thế Duy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -30,20 +31,57 @@
             margin-bottom: 40px;
             transform: translateZ(30px);
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 10;
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #ff7e5f, #feb47b, #ff7e5f);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            position: relative;
+            display: inline-block;
+            padding: 0 20px;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(255, 126, 95, 0.7), 
+                             0 0 20px rgba(255, 126, 95, 0.5),
+                             0 0 30px rgba(255, 126, 95, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 15px rgba(255, 126, 95, 0.8), 
+                             0 0 30px rgba(255, 126, 95, 0.6),
+                             0 0 45px rgba(255, 126, 95, 0.4),
+                             0 0 60px rgba(255, 126, 95, 0.2);
+            }
         }
 
         .header p {
-            font-size: 1.2rem;
-            opacity: 0.8;
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-top: 10px;
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .header p .subject {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 2px 10px;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #8a2be2, #4b0082);
+            color: white;
+            font-weight: 600;
         }
 
         .book-stack {
@@ -326,6 +364,42 @@
             z-index: -1;
         }
 
+        /* Hiệu ứng hạt sáng nền */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         /* Responsive: Mobile */
         @media (max-width: 768px) {
             .header h1 {
@@ -370,14 +444,22 @@
                 transform: translateZ(20px) rotateX(3deg) translateY(-5px);
             }
         }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
     <div class="global-light"></div>
+    <div class="particles" id="particles"></div>
     
     <div class="header">
-        <h1>8 Cuốn Sách Của Mai Thế Duy</h1>
-        <p>Triển Lãm 3D với Hiệu Ứng Chiều Sâu Nâng Cao</p>
+        <h1>8 Cuốn Sách Của Tác Giả Mai Thế Duy</h1>
+        <p>Chủ đề <span class="subject">Toán học</span>, <span class="subject">Khoa học kỹ thuật</span> và <span class="subject">Triết học</span></p>
     </div>
 
     <div class="book-stack" id="bookStack">
@@ -445,7 +527,7 @@
             <div class="shadow"></div>
             <div class="author">Mai Thế Duy</div>
             <div class="title">Siêu khối cong trên một sân khấu phẳng</div>
-            <div class="publisher">NXB Toán học</div> <!-- Đã thay đổi từ Văn học sang Toán học -->
+            <div class="publisher">NXB Toán học</div>
         </div>
 
         <!-- Book 7 -->
@@ -471,6 +553,10 @@
         </div>
 
     </div>
+
+    <footer>
+        <p>Triển lãm sách 3D | Thiết kế với hiệu ứng chiều sâu nâng cao</p>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -500,6 +586,25 @@
                     shadow.style.transform = 'translateZ(-30px)';
                 });
             });
+
+            // Tạo hiệu ứng hạt sáng nền
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 40; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 4 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.animationDuration = `${Math.random() * 10 + 15}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
         });
     </script>
 </body>
