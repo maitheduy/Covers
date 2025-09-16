@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang với hình ảnh tràn viền và mục lục</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        
+        .fullscreen-image {
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .fullscreen-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .image-overlay h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .image-overlay p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+        }
+        
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .table-of-contents {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .toc-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #4e89e8;
+            color: #2c3e50;
+        }
+        
+        .toc-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .toc-header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .toc-chapter {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #4e89e8;
+        }
+        
+        .toc-chapter:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .chapter-number {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: #4e89e8;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .toc-chapter h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+        
+        .chapter-sections {
+            list-style-type: none;
+        }
+        
+        .chapter-sections li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #e0e0e0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .chapter-sections li:last-child {
+            border-bottom: none;
+        }
+        
+        .section-icon {
+            color: #4e89e8;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .chapter-sections a {
+            text-decoration: none;
+            color: #34495e;
+            transition: color 0.2s ease;
+            display: block;
+            flex-grow: 1;
+        }
+        
+        .chapter-sections a:hover {
+            color: #4e89e8;
+        }
+        
+        @media (max-width: 768px) {
+            .image-overlay h1 {
+                font-size: 2.5rem;
+            }
+            
+            .image-overlay p {
+                font-size: 1.2rem;
+            }
+            
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hình ảnh tràn viền -->
+    <div class="fullscreen-image">
+        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1350&q=80" alt="Hình ảnh sách">
+        <div class="image-overlay">
+            <h1>Thiết Kế Bìa Sách Với HTML & CSS</h1>
+            <p>Khám phá nghệ thuật thiết kế bìa sách hiện đại với các kỹ thuật HTML và CSS tiên tiến</p>
+        </div>
+    </div>
+    
+    <!-- Mục lục -->
+    <div class="content">
+        <div class="table-of-contents">
+            <div class="toc-header">
+                <h2>Mục Lục</h2>
+                <p>Danh sách các chương và nội dung chính của sách</p>
+            </div>
+            
+            <div class="toc-grid">
+                <!-- Chương 1 -->
+                <div class="toc-chapter">
+                    <h3><span class="chapter-number">1</span>Giới Thiệu Chung</h3>
+                    <ul class="chapter-sections">
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Tại sao lại là HTML/CSS cho bìa sách?</a></li>
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Các công cụ cần thiết</a></li>
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Cấu trúc cơ bản của trang HTML</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Chương 2 -->
+                <div class="toc-chapter">
+                    <h3><span class="chapter-number">2</span>Nền Bìa Sách</h3>
+                    <ul class="chapter-sections">
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Sức mạnh của Gradient màu sắc</a></li>
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Tạo hiệu ứng nền với hình ảnh</a></li>
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Bo viền 3D cho bìa sách</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Chương 3 -->
+                <div class="toc-chapter">
+                    <h3><span class="chapter-number">3</span>Hình Ảnh</h3>
+                    <ul class="chapter-sections">
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Nguồn hình ảnh chất lượng cao</a></li>
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Bo viền hình ảnh</a></li>
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Hiệu ứng đổ bóng và tương tác</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Chương 4 -->
+                <div class="toc-chapter">
+                    <h3><span class="chapter-number">4</span>Bố Cục và Định Vị</h3>
+                    <ul class="chapter-sections">
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Sức mạnh của position: absolute</a></li>
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Quản lý các lớp phủ với z-index</a></li>
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Tạo bố cục động và phức tạp</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Chương 5 -->
+                <div class="toc-chapter">
+                    <h3><span class="chapter-number">5</span>Văn Bản và Hiệu Ứng</h3>
+                    <ul class="chapter-sections">
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Lựa chọn font chữ thích hợp</a></li>
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Hiệu ứng phát sáng cho văn bản</a></li>
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Văn bản trang trí và nền mờ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Chương 6 -->
+                <div class="toc-chapter">
+                    <h3><span class="chapter-number">6</span>Yếu Tố Trang Trí</h3>
+                    <ul class="chapter-sections">
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Công thức toán học và biểu tượng</a></li>
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Hiệu ứng ngôi sao nhấp nháy</a></li>
+                        <li><i class="section-icon fas fa-chevron-right"></i><a href="#">Thêm các dải màu sắc</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
