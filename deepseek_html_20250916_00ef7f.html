@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyến Phiêu Lưu Vào Thế Giới Vi Phân và Tích Phân</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f0f8ff;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .book-cover {
+            width: 210mm;
+            height: 297mm;
+            position: relative;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, white, transparent),
+                radial-gradient(2px 2px at 40px 70px, white, transparent),
+                radial-gradient(1px 1px at 50px 160px, white, transparent),
+                radial-gradient(1px 1px at 130px 40px, white, transparent),
+                radial-gradient(2px 2px at 80px 10px, white, transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.5;
+            animation: twinkle 5s infinite;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.5; }
+        }
+        
+        .title-container {
+            position: absolute;
+            top: 40px;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .main-title {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 42px;
+            color: #2c3e50;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            line-height: 1.2;
+            padding: 0 20px;
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .content-container {
+            position: absolute;
+            top: 180px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+        }
+        
+        .glasses-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        
+        .glass {
+            width: 180px;
+            height: 180px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .glass:hover {
+            transform: scale(1.05);
+        }
+        
+        .microscope {
+            background: url('https://picsum.photos/seed/microscope/180/180.jpg') center/cover;
+            border-radius: 50%;
+            border: 5px solid #e74c3c;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+        }
+        
+        .telescope {
+            background: url('https://picsum.photos/seed/telescope/180/180.jpg') center/cover;
+            border-radius: 50%;
+            border: 5px solid #3498db;
+            box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+        }
+        
+        .glass-label {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .microscope-label {
+            color: #e74c3c;
+        }
+        
+        .telescope-label {
+            color: #3498db;
+        }
+        
+        .rocket {
+            position: absolute;
+            bottom: 80px;
+            left: 40px;
+            width: 120px;
+            height: 120px;
+            background: url('https://picsum.photos/seed/rocket/120/120.jpg') center/cover;
+            border-radius: 50%;
+            border: 3px solid #f39c12;
+            box-shadow: 0 0 15px rgba(243, 156, 18, 0.5);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animation {
+            position: absolute;
+            bottom: 80px;
+            right: 40px;
+            width: 120px;
+            height: 120px;
+            background: url('https://picsum.photos/seed/animation/120/120.jpg') center/cover;
+            border-radius: 50%;
+            border: 3px solid #9b59b6;
+            box-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
+            animation: float 3s ease-in-out infinite;
+            animation-delay: 1.5s;
+        }
+        
+        .adventure-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8),
+                        inset 0 0 15px rgba(255, 255, 255, 0.5);
+            z-index: 20;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                            inset 0 0 15px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                box-shadow: 0 0 30px rgba(255, 255, 255, 1),
+                            inset 0 0 20px rgba(255, 255, 255, 0.7);
+            }
+        }
+        
+        .math-formulas {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 24px;
+            color: #2c3e50;
+            z-index: 1;
+        }
+        
+        .formula1 {
+            top: 150px;
+            left: 30px;
+            transform: rotate(-15deg);
+        }
+        
+        .formula2 {
+            top: 200px;
+            right: 40px;
+            transform: rotate(10deg);
+        }
+        
+        .formula3 {
+            bottom: 180px;
+            left: 60px;
+            transform: rotate(5deg);
+        }
+        
+        .formula4 {
+            bottom: 220px;
+            right: 70px;
+            transform: rotate(-8deg);
+        }
+        
+        .rainbow {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: linear-gradient(90deg, 
+                #ff0000 0%, 
+                #ff7f00 14%, 
+                #ffff00 28%, 
+                #00ff00 42%, 
+                #0000ff 57%, 
+                #4b0082 71%, 
+                #8b00ff 85%);
+            opacity: 0.7;
+        }
+        
+        .author {
+            position: absolute;
+            bottom: 25px;
+            right: 30px;
+            font-size: 16px;
+            font-style: italic;
+            color: #2c3e50;
+        }
+        
+        .publisher {
+            position: absolute;
+            bottom: 45px;
+            right: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="book-cover">
+        <div class="stars"></div>
+        
+        <div class="math-formulas formula1">∫ f(x) dx</div>
+        <div class="math-formulas formula2">dy/dx</div>
+        <div class="math-formulas formula3">∑ Δx</div>
+        <div class="math-formulas formula4">lim h→0</div>
+        
+        <div class="title-container">
+            <h1 class="main-title">Chuyến Phiêu Lưu Vào Thế Giới</h1>
+            <h2 class="subtitle">Vi Phân và Tích Phân</h2>
+        </div>
+        
+        <div class="content-container">
+            <div class="glasses-container">
+                <div class="glass microscope">
+                    <div class="glass-label microscope-label">Kính Hiển Vi Thần Kỳ</div>
+                </div>
+                <div class="glass telescope">
+                    <div class="glass-label telescope-label">Kính Viễn Vọng Ma Thuật</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="rocket"></div>
+        <div class="animation"></div>
+        
+        <div class="adventure-text">
+            Chuyến phiêu lưu vào thế giới vô cùng nhỏ và vô cùng lớn... bắt đầu!
+        </div>
+        
+        <div class="rainbow"></div>
+        <div class="publisher">Nhà Xuất Bản Đức Long</div>
+        <div class="author">Tác giả: Tiến sĩ Mai Thế Duy</div>
+    </div>
+</body>
+</html>
