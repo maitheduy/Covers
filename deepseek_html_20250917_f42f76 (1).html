@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trừu Tượng Is All You Need</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@700&family=Source+Code+Pro:wght@300&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 210mm;
+            height: 297mm;
+            background-color: #f5f5f5;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a2a6c 0%, #2a5298 50%, #3a539b 100%);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cover-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(circle at 20% 50%, white 1px, transparent 1px),
+                radial-gradient(circle at 80% 20%, white 1px, transparent 1px),
+                radial-gradient(circle at 40% 80%, white 1px, transparent 1px),
+                radial-gradient(circle at 90% 40%, white 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .math-symbols {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.03;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 24px;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .math-symbols span {
+            position: absolute;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(300px) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        .title-container {
+            position: absolute;
+            top: 15%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 2;
+            padding: 0 20px;
+        }
+        
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+        
+        .author-info {
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .author-name {
+            font-size: 22px;
+            color: white;
+            margin-bottom: 5px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        .publisher {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+        }
+        
+        .quote-section {
+            position: absolute;
+            bottom: 12%;
+            left: 0;
+            right: 0;
+            padding: 0 60px;
+            z-index: 2;
+        }
+        
+        .quote-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            text-align: center;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .abstract-symbol {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 240px;
+            height: 240px;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .symbol-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid white;
+            position: relative;
+            animation: pulse 15s infinite linear;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+        
+        .symbol-inner::before,
+        .symbol-inner::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+        
+        .symbol-inner::before {
+            width: 70%;
+            height: 70%;
+            border: 1px solid white;
+        }
+        
+        .symbol-inner::after {
+            width: 40%;
+            height: 40%;
+            border: 1px solid white;
+        }
+        
+        .symbol-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 1px;
+            background: white;
+            transform-origin: center;
+        }
+        
+        .symbol-line:nth-child(1) {
+            transform: rotate(45deg);
+        }
+        
+        .symbol-line:nth-child(2) {
+            transform: rotate(-45deg);
+        }
+        
+        .symbol-line:nth-child(3) {
+            transform: rotate(90deg);
+        }
+        
+        .symbol-line:nth-child(4) {
+            transform: rotate(0deg);
+        }
+        
+        .bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(to right, #ff6b6b, #ffa500, #ffd700, #32cd32, #00bfff, #9932cc);
+        }
+        
+        .homage-note {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+            text-align: right;
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="book-cover">
+        <div class="cover-pattern"></div>
+        
+        <div class="math-symbols">
+            <!-- Các ký hiệu toán học trừu tượng -->
+            <span style="left: 10%;">∂</span>
+            <span style="left: 20%;">∫</span>
+            <span style="left: 30%;">∑</span>
+            <span style="left: 40%;">∏</span>
+            <span style="left: 50%;">∇</span>
+            <span style="left: 60%;">√</span>
+            <span style="left: 70%;">∞</span>
+            <span style="left: 80%;">π</span>
+            <span style="left: 90%;">∅</span>
+            <span style="left: 15%; top: 20%;">→</span>
+            <span style="left: 25%; top: 40%;">∀</span>
+            <span style="left: 35%; top: 60%;">∃</span>
+            <span style="left: 45%; top: 80%;">∈</span>
+            <span style="left: 55%; top: 30%;">⊂</span>
+            <span style="left: 65%; top: 50%;">∪</span>
+            <span style="left: 75%; top: 70%;">∩</span>
+        </div>
+        
+        <div class="abstract-symbol">
+            <div class="symbol-inner">
+                <div class="symbol-line"></div>
+                <div class="symbol-line"></div>
+                <div class="symbol-line"></div>
+                <div class="symbol-line"></div>
+            </div>
+        </div>
+        
+        <div class="title-container">
+            <h1 class="main-title">TRỪU TƯỢNG<br>IS ALL YOU NEED</h1>
+            <p class="subtitle">Một lời vinh danh cho sức mạnh của tư duy trừu tượng trong khoa học và trí tuệ nhân tạo</p>
+        </div>
+        
+        <div class="author-info">
+            <p class="author-name">MAI THẾ DUY</p>
+            <p class="publisher">NHÀ XUẤT BẢN ĐỨC LONG</p>
+        </div>
+        
+        <div class="quote-section">
+            <p class="quote-text">
+                "Sự chú ý có thể là tất cả những gì một mô hình AI cần,<br>
+                nhưng đối với con người, có lẽ Trừu tượng mới là tất cả những gì chúng ta thực sự cần để tiến về phía trước."
+            </p>
+        </div>
+        
+        <div class="homage-note">
+            Lời vinh danh gửi đến "Attention Is All You Need" và kiến trúc Transformer
+        </div>
+        
+        <div class="bottom-bar"></div>
+    </div>
+</body>
+</html>
