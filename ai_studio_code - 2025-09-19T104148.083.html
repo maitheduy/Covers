@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bìa Sách: Cây Tre Vô Tận Đốt</title>
+    
+    <!-- Tích hợp MathJax -->
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333;
+        }
+
+        .book-cover {
+            width: 794px; /* A4 width */
+            height: 1123px; /* A4 height */
+            
+            background: linear-gradient(140deg, #84d94e, #2a8a2e, #5ca0f2);
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px;
+            box-sizing: border-box;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            width: 100%;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            font-weight: 800;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.6);
+            margin-bottom: 20px;
+        }
+
+        .author {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .formula-container {
+            width: 100%;
+            padding: 20px 0;
+            perspective: 800px;
+        }
+
+        /* === THAY ĐỔI CHÍNH Ở ĐÂY === */
+        #math-formula {
+            /* 1. Giảm kích thước font xuống 1/2 */
+            font-size: 2.75em; /* Giá trị cũ là 5.5em */
+            
+            color: #f0f0f0;
+            
+            /* 2. Giảm các giá trị shadow tương ứng để hiệu ứng 3D tinh tế hơn */
+            text-shadow:
+                -0.5px -0.5px 1px rgba(255, 255, 255, 0.4), /* Highlight */
+                0.5px 0.5px 0px #b2b2b2,
+                1px 1px 0px #a0a0a0,
+                1.5px 1.5px 0px #8e8e8e,
+                2px 2px 0px #7c7c7c,
+                2.5px 2.5px 0px #6a6a6a, /* Độ dày */
+                4px 6px 15px rgba(0, 0, 0, 0.45); /* Bóng đổ */
+            
+            transform: rotateX(10deg);
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .book-cover:hover #math-formula {
+            transform: rotateX(0deg) scale(1.05);
+        }
+
+
+        .footer {
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            padding-top: 20px;
+        }
+
+        .publisher {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="book-cover">
+        
+        <div class="header">
+            <h1 class="title">Cây Tre Vô Tận Đốt</h1>
+            <p class="author">Mai Thế Duy</p>
+        </div>
+        
+        <div class="formula-container">
+            <div id="math-formula">
+                $$ \int_{\text{gốc}}^{\text{ngọn}} d(\text{tre}) = \text{ngọn} - \text{gốc} $$
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p class="publisher">Nhà Xuất Bản Đức Long</p>
+        </div>
+    </div>
+
+</body>
+</html>
