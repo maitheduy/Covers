@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình Tùy Chỉnh Bìa Sách</title>
+    
+    <!-- Tích hợp MathJax -->
+    <script>
+        MathJax = {
+          tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+          svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 20px;
+            gap: 30px;
+        }
+
+        /* KHU VỰC ĐIỀU KHIỂN */
+        .controls {
+            width: 250px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .controls h3 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .control-btn {
+            padding: 12px 15px;
+            font-size: 16px;
+            font-weight: 600;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+
+        .control-btn:hover {
+            background-color: #357abd;
+        }
+        
+        .control-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* NÚT DONE MỚI */
+        .finalize-btn {
+            background-color: #28a745; /* Màu xanh lá */
+            margin-top: 10px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        .finalize-btn:hover {
+            background-color: #218838;
+        }
+        
+        #imageUpload {
+            display: none;
+        }
+
+        /* KHU VỰC BÌA SÁCH */
+        .book-container {
+             transform: scale(0.8);
+             transform-origin: top center;
+        }
+        
+        .book-cover {
+            width: 794px;
+            height: 1123px;
+            background-image: url('https://images.unsplash.com/photo-1562763563-4735e070a2ea?q=80&w=1974&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px;
+            box-sizing: border-box;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            text-align: center;
+            color: white;
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+        }
+        
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 30, 10, 0.5);
+            z-index: -1;
+        }
+
+        .header, .footer {
+            width: 100%;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .formula-container {
+             width: 100%;
+             z-index: 1;
+        }
+        
+        .title, .author, .publisher {
+            position: relative;
+            cursor: default;
+            /* Thêm transition để đường viền xuất hiện mượt hơn */
+            transition: border 0.2s ease;
+            border: 2px dashed transparent; /* Đặt sẵn viền trong suốt */
+        }
+        
+        .is-draggable {
+            cursor: move !important;
+            border-color: rgba(255, 255, 255, 0.7) !important;
+            padding: 5px;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            font-weight: 800;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.6);
+            margin-bottom: 20px;
+        }
+
+        .author {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        #math-formula {
+            font-size: 2.75em;
+            color: #f0f0f0;
+            text-shadow:
+                -0.5px -0.5px 1px rgba(255, 255, 255, 0.4),
+                0.5px 0.5px 0px #b2b2b2, 1px 1px 0px #a0a0a0,
+                1.5px 1.5px 0px #8e8e8e, 2px 2px 0px #7c7c7c,
+                2.5px 2.5px 0px #6a6a6a, 4px 6px 15px rgba(0, 0, 0, 0.45);
+        }
+
+        .footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            padding-top: 20px;
+        }
+
+        .publisher {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- BẢNG ĐIỀU KHIỂN -->
+    <div class="controls">
+        <h3>Bảng Điều Khiển</h3>
+        
+        <button class="control-btn adjustable-control" id="uploadBtn">1. Thay đổi ảnh nền</button>
+        <input type="file" id="imageUpload" accept="image/*">
+        
+        <button class="control-btn adjustable-control" data-target="#bookTitle">2. Di chuyển Tên sách</button>
+        
+        <button class="control-btn adjustable-control" data-target="#authorName">3. Di chuyển Tên tác giả</button>
+        
+        <button class="control-btn adjustable-control" data-target="#publisherInfo">4. Di chuyển NXB</button>
+        
+        <!-- NÚT DONE MỚI -->
+        <button class="control-btn finalize-btn" id="finalizeBtn">✓ Hoàn tất (Done)</button>
+    </div>
+
+    <!-- BÌA SÁCH -->
+    <div class="book-container">
+        <div class="book-cover" id="bookCover">
+            <div class="header">
+                <h1 class="title" id="bookTitle">Cây Tre Vô Tận Đốt</h1>
+                <p class="author" id="authorName">Mai Thế Duy</p>
+            </div>
+            
+            <div class="formula-container">
+                <div id="math-formula">
+                    $$ \int_{\text{gốc}}^{\text{ngọn}} d(\text{tre}) = \text{ngọn} - \text{gốc} $$
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p class="publisher" id="publisherInfo">Nhà Xuất Bản Đức Long</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookCover = document.getElementById('bookCover');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const imageUpload = document.getElementById('imageUpload');
+            
+            // --- 1. CHỨC NĂNG TẢI ẢNH ---
+            uploadBtn.addEventListener('click', () => imageUpload.click());
+            
+            imageUpload.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        bookCover.style.backgroundImage = `url('${e.target.result}')`;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // --- 2. CHỨC NĂNG DI CHUYỂN PHẦN TỬ ---
+            let currentDraggable = null;
+            let isDragging = false;
+            let startX, startY, initialLeft, initialTop;
+            
+            // Biến trạng thái mới
+            let isEditingMode = true; 
+
+            function activateDraggable(element) {
+                if (!isEditingMode) return; // Không cho chọn nếu không ở chế độ edit
+                if (currentDraggable) {
+                    currentDraggable.classList.remove('is-draggable');
+                }
+                currentDraggable = element;
+                currentDraggable.classList.add('is-draggable');
+            }
+
+            const moveButtons = document.querySelectorAll('.control-btn[data-target]');
+            moveButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetElement = document.querySelector(button.dataset.target);
+                    if (targetElement) {
+                        activateDraggable(targetElement);
+                    }
+                });
+            });
+
+            bookCover.addEventListener('mousedown', (e) => {
+                if (isEditingMode && currentDraggable && e.target === currentDraggable) {
+                    isDragging = true;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    const style = window.getComputedStyle(currentDraggable);
+                    initialLeft = parseInt(style.left, 10) || 0;
+                    initialTop = parseInt(style.top, 10) || 0;
+                }
+            });
+
+            bookCover.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    const dx = e.clientX - startX;
+                    const dy = e.clientY - startY;
+                    currentDraggable.style.left = `${initialLeft + dx}px`;
+                    currentDraggable.style.top = `${initialTop + dy}px`;
+                }
+            });
+
+            const stopDragging = () => { isDragging = false; };
+            bookCover.addEventListener('mouseup', stopDragging);
+            bookCover.addEventListener('mouseleave', stopDragging);
+            
+            
+            // --- 3. CHỨC NĂNG NÚT DONE ---
+            const finalizeBtn = document.getElementById('finalizeBtn');
+            const adjustableControls = document.querySelectorAll('.adjustable-control');
+
+            finalizeBtn.addEventListener('click', () => {
+                isEditingMode = !isEditingMode; // Chuyển đổi trạng thái
+
+                if (isEditingMode) {
+                    // CHUYỂN SANG CHẾ ĐỘ EDIT
+                    finalizeBtn.textContent = '✓ Hoàn tất (Done)';
+                    finalizeBtn.style.backgroundColor = '#28a745'; // Màu xanh
+                    adjustableControls.forEach(btn => btn.style.display = 'block');
+                } else {
+                    // CHUYỂN SANG CHẾ ĐỘ XEM TRƯỚC (DONE)
+                    finalizeBtn.textContent = 'Chỉnh sửa lại';
+                    finalizeBtn.style.backgroundColor = '#6c757d'; // Màu xám
+                    adjustableControls.forEach(btn => btn.style.display = 'none');
+                    
+                    // Bỏ chọn và viền của phần tử đang kéo
+                    if (currentDraggable) {
+                        currentDraggable.classList.remove('is-draggable');
+                        currentDraggable = null;
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
