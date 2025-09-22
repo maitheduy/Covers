@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bản Giao Hưởng Của Chuyển Động</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family: 'Times New Roman', serif;
+            padding: 20px;
+        }
+        
+        .book-cover {
+            width: 210mm; /* Khổ A4 chiều rộng */
+            height: 297mm; /* Khổ A4 chiều cao */
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
+        }
+        
+        .top-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .main-title {
+            font-size: 42px;
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .subtitle {
+            font-size: 22px;
+            font-style: italic;
+            margin-bottom: 40px;
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
+            padding: 10px 0;
+            display: inline-block;
+        }
+        
+        .middle-section {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .graphic-container {
+            width: 300px;
+            height: 200px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .atom {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border: 2px solid black;
+            border-radius: 50%;
+        }
+        
+        .orbit {
+            position: absolute;
+            border: 1px dashed black;
+            border-radius: 50%;
+        }
+        
+        .orbit-1 {
+            width: 150px;
+            height: 150px;
+            top: 25px;
+            left: 75px;
+        }
+        
+        .orbit-2 {
+            width: 200px;
+            height: 200px;
+            top: 0;
+            left: 50px;
+        }
+        
+        .electron {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: black;
+            border-radius: 50%;
+        }
+        
+        .electron-1 {
+            top: 25px;
+            left: 75px;
+        }
+        
+        .electron-2 {
+            top: 140px;
+            left: 145px;
+        }
+        
+        .electron-3 {
+            top: 95px;
+            left: 0;
+        }
+        
+        .formula {
+            font-size: 24px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .concept {
+            font-size: 18px;
+            margin: 10px 0;
+            max-width: 80%;
+        }
+        
+        .bottom-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .author {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .publisher {
+            font-size: 18px;
+            font-style: italic;
+        }
+        
+        .decoration {
+            position: absolute;
+            border: 1px solid black;
+        }
+        
+        .decoration-top-left {
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .decoration-top-right {
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .decoration-bottom-left {
+            bottom: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .decoration-bottom-right {
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .book-cover {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-cover">
+        <!-- Phần trang trí góc -->
+        <div class="decoration decoration-top-left"></div>
+        <div class="decoration decoration-top-right"></div>
+        <div class="decoration decoration-bottom-left"></div>
+        <div class="decoration decoration-bottom-right"></div>
+        
+        <!-- Phần trên: Tiêu đề -->
+        <div class="top-section">
+            <h1 class="main-title">Bản Giao Hưởng<br>Của Chuyển Động</h1>
+            <div class="subtitle">Khám Phá Tốc Độ và Vận Tốc</div>
+        </div>
+        
+        <!-- Phần giữa: Hình ảnh minh họa và công thức -->
+        <div class="middle-section">
+            <div class="graphic-container">
+                <div class="atom"></div>
+                <div class="orbit orbit-1"></div>
+                <div class="orbit orbit-2"></div>
+                <div class="electron electron-1"></div>
+                <div class="electron electron-2"></div>
+                <div class="electron electron-3"></div>
+            </div>
+            
+            <div class="formula">v = Δs / Δt</div>
+            
+            <div class="concept">Kết hợp "mét" không gian và "giây" thời gian</div>
+            <div class="concept">Tạo nên hương vị của chuyển động</div>
+        </div>
+        
+        <!-- Phần dưới: Tác giả và nhà xuất bản -->
+        <div class="bottom-section">
+            <div class="author">Tiến sĩ Mai Thế Duy</div>
+            <div class="publisher">Nhà xuất bản Đức Long</div>
+        </div>
+    </div>
+
+    <script>
+        // Tạo hiệu ứng chuyển động cho các electron
+        document.addEventListener('DOMContentLoaded', function() {
+            const electrons = document.querySelectorAll('.electron');
+            let angle = 0;
+            
+            function animateElectrons() {
+                angle += 0.02;
+                
+                electrons.forEach((electron, index) => {
+                    const radius = 75 + index * 25;
+                    const x = Math.cos(angle + index * 2) * radius;
+                    const y = Math.sin(angle + index * 2) * radius;
+                    
+                    electron.style.transform = `translate(${x}px, ${y}px)`;
+                });
+                
+                requestAnimationFrame(animateElectrons);
+            }
+            
+            animateElectrons();
+        });
+    </script>
+</body>
+</html>
